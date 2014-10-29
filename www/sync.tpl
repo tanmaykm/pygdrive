@@ -89,7 +89,7 @@
                 <td><span class="glyphicon glyphicon-plus btn" id="addgdrive" title="Add for sync"></span></td>
             </tr>
         </table>
-        <div id="modal-overlay" style="display: none;"></div>
     </div>
+    <div id="modal-overlay" style="display: none;"></div>
 </body>
 </html>

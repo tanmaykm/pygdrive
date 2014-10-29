@@ -2,6 +2,7 @@ pygdrive
 ========
 
 A simple Python package that lets you synchronize files to and from your Google Drive.
+This is still work in progress.
 
 ### Setup
 - clone this repository

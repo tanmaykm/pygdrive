@@ -121,7 +121,10 @@ class GDriveSync:
     @staticmethod
     def _upload(locpath, parents=None, remid=None):
         fname = os.path.basename(locpath)
-        # GDriveSync.LOGGER.debug("uploading " + fname + " to " + locpath + ", parents: " + str(parents) + ", remid: " + str(remid))
+        # GDriveSync.LOGGER.debug("uploading " + fname +
+        #                         " to " + locpath +
+        #                         ", parents: " + str(parents) +
+        #                         ", remid: " + str(remid))
         gdrive_file = GDriveSync.DRIVE.CreateFile({'id': remid}) if (remid is not None) else \
             GDriveSync.DRIVE.CreateFile({'title': fname, 'parents': parents})
         gdrive_file.SetContentFile(locpath)
@@ -205,7 +208,7 @@ class GDriveSync:
             shutil.rmtree(loc)
 
         # create the folder and .gdrive file
-        os.mkdir(loc)
+        os.makedirs(loc)
         with open(os.path.join(loc, '.gdrive'), 'w') as f:
             f.write(gfolder)
         GDriveSync._clone_gfolder(GDriveSync.folder_id(gfolder), loc)
@@ -217,7 +220,7 @@ class GDriveSync:
         for f in drive.ListFile({'q': "'" + gfolder + "' in parents and trashed=false"}).GetList():
             fpath = os.path.join(loc, f['title'])
             if 'application/vnd.google-apps.folder' in f['mimeType']:
-                os.mkdir(fpath)
+                os.makedirs(fpath)
                 GDriveSync._clone_gfolder(f['id'], fpath)
             else:
                 GDriveSync._download(fpath, f['id'])
@@ -226,6 +229,8 @@ class GDriveSync:
     def scan_repo_paths(dirs):
         repos = []
         for d in dirs:
+            if not os.path.exists(d):
+                continue
             for pth in os.listdir(d):
                 if pth.startswith('.'):
                     continue
