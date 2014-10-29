@@ -1,0 +1,13 @@
+{
+    "port" : 8000,
+
+    "google_oauth": {
+        "key": "",
+        "secret": "",
+        "browser_api_key": ""
+    },
+
+    "home_folder" : "~/pygdrive/",
+    "token_file" : "~/.pygdrive/gtok",
+    "dummy" : "dummy"
+}
